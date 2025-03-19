@@ -1,2 +1,8 @@
+# Elementos de Back que devem ser ignorados pelo GitHub
 back/.env
 back/node_modules/
+back/dist/
+
+# Elementos de Front que devem ser ignorados pelo GitHub
+front/node_modules/
+front/dist/
