@@ -1,5 +1,5 @@
 import { IoIosAddCircle } from "react-icons/io";
-import CreateTask from "../createTask/createTask";
+import CreateTask from "../modals/createTask/createTask";
 import { useState } from "react";
 
 function AddTask() {

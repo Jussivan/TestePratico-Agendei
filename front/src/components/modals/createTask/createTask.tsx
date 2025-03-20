@@ -1,6 +1,6 @@
 interface CreateTaskProps {
     isOpen: boolean; // Define o tipo da prop isOpen como boolean
-  }
+}
   
   function CreateTask({ isOpen }: CreateTaskProps) {
 
@@ -9,7 +9,7 @@ interface CreateTaskProps {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
                 <form className="grid bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-left gap-2">
                     <div className="flex justify-center">
-                        <label className="text-xl font-bold">Criar Nova Tarefa</label>
+                        <label className="text-xl font-bold text-green-600">Criar Nova Tarefa</label>
                     </div>
                     <label className="block text-sm font-medium text-gray-800">Título</label>
                     <input
