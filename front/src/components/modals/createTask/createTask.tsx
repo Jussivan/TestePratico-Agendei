@@ -1,8 +1,12 @@
+
+
 interface CreateTaskProps {
     isOpen: boolean; // Define o tipo da prop isOpen como boolean
 }
   
   function CreateTask({ isOpen }: CreateTaskProps) {
+    function handleSubmit() {
+    }
 
     return (
         <>{isOpen ?
