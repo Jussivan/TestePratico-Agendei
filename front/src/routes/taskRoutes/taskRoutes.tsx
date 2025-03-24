@@ -24,7 +24,7 @@ const TaskRoutes = {
   },
 
   // Função para atualizar uma tarefa
-  updateTask: async (taskId: string, updatedData: { name?: string; description?: string, deadline: Date }) => {
+  updateTask: async (taskId: Number, updatedData: { name?: string; description?: string, deadline: Date }) => {
     try {
       const response = await api.put(`/tasks/${taskId}`, updatedData);
       return response.data;
@@ -35,7 +35,7 @@ const TaskRoutes = {
   },
 
   // Função para deletar uma tarefa
-  deleteTask: async (taskId: string) => {
+  deleteTask: async (taskId: Number) => {
     try {
       const response = await api.delete(`/tasks/${taskId}`);
       return response.data;

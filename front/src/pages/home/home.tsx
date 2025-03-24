@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 // Defina a interface para a tarefa
 interface Task {
-  id?: string; // Opcional, dependendo da sua API
+  id: Number; // Opcional, dependendo da sua API
   name: string;
   description: string;
   deadline: Date; // Ou Date, dependendo da sua API
@@ -14,18 +14,22 @@ function Home() {
   // Defina o tipo do estado tasks como Task[]
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  const fetchTasks = async () => {
+    try {
+      const tasksData = await TaskRoutes.getTasks();
+      setTasks(tasksData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const tasksData = await TaskRoutes.getTasks();
-        console.log(tasksData);
-        setTasks(tasksData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchTasks();
   }, []);
+
+  const refreshTasks = () => {
+    fetchTasks(); // Rebusca as tarefas após uma operação
+  };
 
   return (
     <div className='min-h-screen bg-neutral-100 pt-25 py-10 px-50'>
@@ -33,9 +37,11 @@ function Home() {
         {tasks.map((task, index) => (
           <TaskCard
             key={index} // Use o índice como key (não ideal)
+            id={task.id}
             name={task.name}
             description={task.description}
             deadline={task.deadline}
+            refreshTasks={refreshTasks}
           />
         ))}
       </div>
