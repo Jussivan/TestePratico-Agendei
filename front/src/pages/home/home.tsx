@@ -2,49 +2,72 @@ import TaskCard from '../../components/taskCard/taskCard';
 import TaskRoutes from '../../routes/taskRoutes/taskRoutes';
 import { useEffect, useState } from 'react';
 
-// Defina a interface para a tarefa
 interface Task {
-  id: Number; // Opcional, dependendo da sua API
+  id: number;
   name: string;
   description: string;
-  deadline: Date; // Ou Date, dependendo da sua API
+  deadline: Date;
 }
 
-function Home() {
-  // Defina o tipo do estado tasks como Task[]
+function Home({ searchResults }: { searchResults?: Task[] | null }) {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTasks = async () => {
+  // Busca TODAS as tasks da API
+  const fetchAllTasks = async () => {
     try {
+      setIsLoading(true);
       const tasksData = await TaskRoutes.getTasks();
       setTasks(tasksData);
     } catch (err) {
-      console.log(err);
+      console.error("Erro ao buscar tarefas:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // Carrega as tasks ao iniciar
   useEffect(() => {
-    fetchTasks();
+    fetchAllTasks();
   }, []);
 
-  const refreshTasks = () => {
-    fetchTasks(); // Rebusca as tarefas após uma operação
-  };
+  // Define quais tasks mostrar
+  const tasksToRender = searchResults === null || searchResults === undefined 
+    ? tasks 
+    : (searchResults.length > 0 
+      ? searchResults 
+      : []);
 
   return (
     <div className='min-h-screen bg-neutral-100 pt-25 py-10 px-50'>
-      <div className='grid grid-cols-2 gap-10'>
-        {tasks.map((task, index) => (
-          <TaskCard
-            key={index} // Use o índice como key (não ideal)
-            id={task.id}
-            name={task.name}
-            description={task.description}
-            deadline={task.deadline}
-            refreshTasks={refreshTasks}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex justify-center items-center">
+          <p>Carregando tarefas...</p>
+        </div>
+      ) : (
+        <div className='grid grid-cols-2 gap-10'>
+          {tasksToRender.length > 0 ? (
+            tasksToRender.map(task => (
+              <TaskCard
+                key={task.id}
+                id={task.id}
+                name={task.name}
+                description={task.description}
+                deadline={task.deadline}
+                refreshTasks={fetchAllTasks}
+              />
+            ))
+          ) : (
+            <div className="col-span-2 text-center py-10">
+              <p className="text-lg text-gray-500">
+                {searchResults !== null && searchResults !== undefined && searchResults.length === 0
+                  ? "Nenhuma tarefa encontrada com esse critério."
+                  : "Nenhuma tarefa cadastrada ainda."}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -16,8 +16,8 @@ class TaskController {
     }
 
     // Busca uma tarefa pelo ID
-    async getById(req: Request, res: Response) {
-        const task = await TaskService.getTaskById(parseInt(req.params.id));
+    async getByName(req: Request, res: Response) {
+        const task = await TaskService.getTaskByName(req.params.name);
         res.status(200).json(task);
     }
 

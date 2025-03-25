@@ -23,6 +23,17 @@ const TaskRoutes = {
     }
   },
 
+  // Função para buscar todas as tarefas
+  getTaskByName: async (taskName: string) => {
+    try {
+      const response = await api.get(`/tasks/${taskName}`);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+      throw error;
+    }
+  },
+
   // Função para atualizar uma tarefa
   updateTask: async (taskId: Number, updatedData: { name?: string; description?: string, deadline: Date }) => {
     try {

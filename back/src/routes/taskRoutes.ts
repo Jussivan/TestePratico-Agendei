@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/tasks', TaskController.create);
 router.get('/tasks', TaskController.getAll);
-router.get('/tasks/:id', TaskController.getById);
+router.get('/tasks/:name', TaskController.getByName);
 router.put('/tasks/:id', TaskController.update);
 router.delete('/tasks/:id', TaskController.delete);
 

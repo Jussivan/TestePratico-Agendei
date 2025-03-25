@@ -18,10 +18,13 @@ class TaskRepository {
         return result.rows;
     }
 
-    // Busca uma tarefa pelo ID
-    async findById(id: number) {
-        const result = await pool.query('SELECT * FROM Tasks WHERE id = $1', [id]);
-        return result.rows[0];
+    // Busca tarefas pelo nome (case insensitive e parcial match)
+    async findByName(name: string) {
+        const result = await pool.query(
+            'SELECT * FROM Tasks WHERE name ILIKE $1',
+            [`${name}%`]
+        );
+        return result.rows;
     }
 
     // Atualiza uma tarefa existente
