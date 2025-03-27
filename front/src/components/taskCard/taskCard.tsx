@@ -28,7 +28,7 @@ function TaskCard({ id, name, description, deadline, refreshTasks }: TaskCardPro
     <div className="grid grid-rows-7 bg-white border border-gray-200 rounded-lg gap-1 shadow-md pb-3 flex flex-col h-[280px]">
       {/* Título e Data */}
       <div className="row-start-1 row-end-3 flex justify-between items-center bg-green-600 px-6 py-2 rounded-t-lg">
-        <p className="text-2xl font-bold tracking-normal text-white">{name}</p>
+        <p className="text-2xl font-bold tracking-normal text-white pr-1">{name}</p>
         <div className="bg-green-500 p-1 px-2 rounded-full">
           <p className="text-lg font-semibold text-green-100 tracking-wide">
             {formatarData(deadline)}
