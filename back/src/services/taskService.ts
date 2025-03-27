@@ -14,8 +14,8 @@ class TaskService {
     }
 
     // Busca uma tarefa pelo ID
-    async getTaskById(id: number) {
-        return await TaskRepository.findById(id);
+    async getTaskByName(name: string) {
+        return await TaskRepository.findByName(name);
     }
 
     // Atualiza uma tarefa
