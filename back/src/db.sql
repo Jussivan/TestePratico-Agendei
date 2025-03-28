@@ -4,5 +4,3 @@ CREATE TABLE Tasks (
     description TEXT,               -- Descrição da tarefa (opcional)
     deadline TIMESTAMP              -- Prazo da tarefa (opcional, tipo datetime)
 );
-
-drop table Tasks;
