@@ -4,5 +4,6 @@ back/node_modules/
 back/dist/
 
 # Elementos de Front que devem ser ignorados pelo GitHub
+front/.env
 front/node_modules/
 front/dist/
