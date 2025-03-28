@@ -2,6 +2,7 @@ import TaskCard from '../../components/taskCard/taskCard';
 import TaskRoutes from '../../routes/taskRoutes/taskRoutes';
 import { useEffect, useState } from 'react';
 
+// Definição da interface para representar uma tarefa
 interface Task {
   id: number;
   name: string;
@@ -9,29 +10,34 @@ interface Task {
   deadline: Date;
 }
 
+// Componente Home que recebe um parâmetro opcional de resultados da busca
 function Home({ searchResults }: { searchResults?: Task[] | null }) {
+  // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<Task[]>([]);
+  // Estado para controlar o carregamento das tarefas
   const [isLoading, setIsLoading] = useState(true);
 
-  // Busca TODAS as tasks da API
+  // Função assíncrona para buscar todas as tarefas da API
   const fetchAllTasks = async () => {
     try {
-      setIsLoading(true);
-      const tasksData = await TaskRoutes.getTasks();
-      setTasks(tasksData);
+      setIsLoading(true); // Define que está carregando
+      const tasksData = await TaskRoutes.getTasks(); // Chama a API para buscar as tarefas
+      setTasks(tasksData); // Atualiza o estado com as tarefas recebidas
     } catch (err) {
       console.error("Erro ao buscar tarefas:", err);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Finaliza o carregamento
     }
   };
 
-  // Carrega as tasks ao iniciar
+  // useEffect para carregar as tarefas assim que o componente for montado
   useEffect(() => {
     fetchAllTasks();
   }, []);
 
-  // Define quais tasks mostrar
+  // Define quais tarefas serão exibidas
+  // Se `searchResults` for null ou undefined, usa todas as tarefas (`tasks`)
+  // Se `searchResults` estiver vazio, exibe uma mensagem informando que nada foi encontrado
   const tasksToRender = searchResults === null || searchResults === undefined 
     ? tasks 
     : (searchResults.length > 0 
@@ -40,13 +46,16 @@ function Home({ searchResults }: { searchResults?: Task[] | null }) {
 
   return (
     <div className='min-h-screen bg-neutral-100 pt-25 py-10 px-50'>
+      {/* Exibe a mensagem de carregamento enquanto as tarefas estão sendo buscadas */}
       {isLoading ? (
         <div className="flex justify-center items-center">
           <p>Carregando tarefas...</p>
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-10'>
+          {/* Verifica se há tarefas para exibir */}
           {tasksToRender.length > 0 ? (
+            // Mapeia e renderiza os cards de tarefas
             tasksToRender.map(task => (
               <TaskCard
                 key={task.id}
@@ -54,10 +63,11 @@ function Home({ searchResults }: { searchResults?: Task[] | null }) {
                 name={task.name}
                 description={task.description}
                 deadline={task.deadline}
-                refreshTasks={fetchAllTasks}
+                refreshTasks={fetchAllTasks} // Passa a função para atualizar as tarefas após ações no card
               />
             ))
           ) : (
+            // Exibe mensagem caso não haja tarefas disponíveis
             <div className="col-span-2 text-center py-10">
               <p className="text-lg text-gray-500">
                 {searchResults !== null && searchResults !== undefined && searchResults.length === 0
