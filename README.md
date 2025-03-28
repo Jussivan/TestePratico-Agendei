@@ -66,4 +66,4 @@ npm run dev
 - Verifique as versões do Node.js e npm
 
 ## Contato
-Em caso de dúvidas, entre em contato comigo pelo [Meu LinkedIn]([https://www.example.com](https://www.linkedin.com/in/jussivan-bezerra-matos-49254228b/))
+Em caso de dúvidas, entre em contato comigo pelo [Meu LinkedIn](https://www.example.com](https://www.linkedin.com/in/jussivan-bezerra-matos-49254228b/)
