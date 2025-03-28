@@ -1,61 +1,69 @@
 # Configuração do Projeto
 
+## Pré-requisitos
+- Git
+- Node.js
+- npm
+- PostgreSQL
+- VS Code (opcional)
+
 ## Clonando o Repositório
-sh
+
+```bash
 # Clone o repositório
 git clone <URL_DO_REPOSITORIO>
 
 # Acesse a pasta do projeto
 cd <NOME_DO_PROJETO>
 
-
-## Abrindo no VS Code
-sh
+# Abra no VS Code (opcional)
 code .
-
-
----
+```
 
 ## Configuração do Backend
 
-1. Crie uma database no pgAdmin.
-2. Importe o SQL do arquivo db.sql.
-3. Execute o código Postgres.
-4. Renomeie o arquivo .env.example para .env.
-5. Preencha o arquivo .env com as informações necessárias.
-6. No terminal, navegue para a pasta back:
+### Preparação do Banco de Dados
+1. Crie um novo banco de dados no pgAdmin
+2. Importe o script SQL do arquivo `db.sql`
 
-   sh
-   cd back
-   
-7. Instale as dependências:
+### Configuração do Ambiente
+1. Renomeie o arquivo `.env.example` para `.env`
+2. Preencha o arquivo `.env` com as informações de conexão do banco de dados e outras configurações necessárias
 
-   sh
-   npm i
-   
-8. Inicie o servidor:
+### Instalação e Execução
+```bash
+# Navegue para a pasta do backend
+cd back
 
-   sh
-   npm run dev
-   
+# Instale as dependências
+npm install
 
----
+# Inicie o servidor de desenvolvimento
+npm run dev
+```
 
 ## Configuração do Frontend
 
-1. Renomeie o arquivo .env.example para .env.
-2. Preencha o arquivo .env com as informações necessárias.
-3. No terminal, navegue para a pasta front:
+### Configuração do Ambiente
+1. Renomeie o arquivo `.env.example` para `.env`
+2. Preencha o arquivo `.env` com as configurações necessárias (URLs de API, chaves, etc.)
 
-   sh
-   cd front
-   
-4. Instale as dependências:
+### Instalação e Execução
+```bash
+# Navegue para a pasta do frontend
+cd front
 
-   sh
-   npm i
-   
-5. Inicie o frontend:
+# Instale as dependências
+npm install
 
-   sh
-   npm run dev
+# Inicie o servidor de desenvolvimento
+npm run dev
+```
+
+## Solução de Problemas
+- Verifique se todas as dependências estão instaladas
+- Confirme que as configurações no `.env` estão corretas
+- Verifique as versões do Node.js e npm
+
+## Contato
+Em caso de dúvidas, entre em contato com a equipe de desenvolvimento.
